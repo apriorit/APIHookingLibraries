@@ -1,9 +1,9 @@
 ______________________________________________________________________________________________________________
 
-* [About Library](#About Microsoft Detours Library)
-* [Content of project](#content of project)
+* [About Library](#aboutmicrosoftdetourslibrary)
+* [Content of project](#contentofproject)
 * [Usage](#usage)
-* [Expected result](#expected result)
+* [Expected result](#expectedresult)
 ______________________________________________________________________________________________________________
 
 # About Microsoft Detours Library

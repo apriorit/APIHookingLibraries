@@ -1,9 +1,9 @@
 ______________________________________________________________________________________________________________
 
-* [About Library](#About Deviare Library)
-* [Content of project](#content of project)
+* [About Library](#aboutdeviarelibrary)
+* [Content of project](#contentofproject)
 * [Usage](#usage)
-* [Expected result](#expected result)
+* [Expected result](#expectedresult)
 ______________________________________________________________________________________________________________
 
 # About Deviare Library

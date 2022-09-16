@@ -1,9 +1,9 @@
 ______________________________________________________________________________________________________________
 
-* [About Library](#About EasyHook Library)
-* [Content of project](#content of project)
+* [About Library](#abouteasyhooklibrary)
+* [Content of project](#contentofproject)
 * [Usage](#usage)
-* [Expected result](#expected result)
+* [Expected result](#expectedresult)
 ______________________________________________________________________________________________________________
 
 # About EasyHook Library
