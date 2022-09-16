@@ -1,7 +1,7 @@
 ______________________________________________________________________________________________________________
 
-* [About Library](#About MHook Library)
-* [Content of project](#Content of project)
+* [About MHook Library](#aboutmhooklibrary)
+* [Content of project](#contentofproject)
 * [Usage](#usage)
 ______________________________________________________________________________________________________________
 
