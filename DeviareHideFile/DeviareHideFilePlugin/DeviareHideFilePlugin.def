@@ -1,0 +1,3 @@
+EXPORTS
+    HookFunction @1
+    UnhookFunction @2

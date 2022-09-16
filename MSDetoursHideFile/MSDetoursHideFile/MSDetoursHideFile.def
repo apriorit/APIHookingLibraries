@@ -1,0 +1,4 @@
+LIBRARY "MSDetoursHideFile"
+EXPORTS
+    HookFunction @1  PRIVATE
+    UnhookFunction @2  PRIVATE
