@@ -8,14 +8,6 @@
 #else
 #pragma comment(lib, "NktHookLib")
 #endif
-
-typedef int (WINAPI* lpfnMessageBoxW)(__in_opt HWND hWnd, __in_opt LPCWSTR lpText, __in_opt LPCWSTR lpCaption, __in UINT uType);
-static struct {
-    SIZE_T nHookId;
-    lpfnMessageBoxW fnMessageBoxW;
-} sMessageBoxW_Hook = { 0, NULL };
-
-static CNktHookLib cHookMgr;
 //-----------------------------------------------------------
 
 #define STATUS_SUCCESS   ((NTSTATUS)0x00000000L)
@@ -34,6 +26,13 @@ typedef NTSTATUS(WINAPI* _NtQueryDirectoryFile)(
     IN OPTIONAL  PUNICODE_STRING        FileName,
     IN           BOOLEAN                RestartScan
 );
+
+static struct {
+    SIZE_T nHookId;
+    _NtQueryDirectoryFile trueNtQueryDirectoryFile;
+} sNtQueryDirectoryFile_Hook = { 0, NULL };
+
+static CNktHookLib cHookMgr;
 
 // Special data structures for managing NtQueryDirectoryFile.
 #define FileIdBothDirectoryInformation 37
@@ -113,23 +112,23 @@ extern "C" HRESULT WINAPI HookFunction()
     if (ntdllDLL == NULL)
     {
         OutputDebugStringW(L"DeviarePlugin.dll:HookFunction - Error: Cannot get handle of ntdll.dll");
-        return 0;
+        return 1;
     }
 
     LPVOID NtQueryDirectoryFile = NktHookLibHelpers::GetProcedureAddress(ntdllDLL, "NtQueryDirectoryFile");
     if (NtQueryDirectoryFile == NULL)
     {
         OutputDebugStringW(L"DeviarePlugin.dll:HookFunction - Error: Cannot get address of NtQueryDirectoryFile");
-        return 0;
+        return 1;
     }
 
-    HRESULT dwOsErr = cHookMgr.Hook(&(sMessageBoxW_Hook.nHookId), (LPVOID*)&(sMessageBoxW_Hook.fnMessageBoxW),
+    HRESULT dwOsErr = cHookMgr.Hook(&(sNtQueryDirectoryFile_Hook.nHookId), (LPVOID*)&(sNtQueryDirectoryFile_Hook.trueNtQueryDirectoryFile),
         NtQueryDirectoryFile, HookNtQueryDirectoryFile, NKTHOOKLIB_DisallowReentrancy);
     return dwOsErr;
 }
 
 extern "C" HRESULT WINAPI UnhookFunction()
 {
-    const HRESULT dwOsErr = cHookMgr.Unhook(sMessageBoxW_Hook.nHookId);
+    const HRESULT dwOsErr = cHookMgr.Unhook(sNtQueryDirectoryFile_Hook.nHookId);
     return dwOsErr;
 }
