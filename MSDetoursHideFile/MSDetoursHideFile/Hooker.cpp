@@ -92,7 +92,7 @@ void HookFunction()
 {
     DetourRestoreAfterWith();
 
-    OutputDebugStringA("MSDetoursHideFile.dll:Starting.\n");
+    printf("MSDetoursHideFile.dll:Starting.\n");
     fflush(stdout);
 
     DetourTransactionBegin();
@@ -102,13 +102,11 @@ void HookFunction()
 
     if (error == NO_ERROR) 
     {
-        OutputDebugStringA("MSDetoursHideFile.dll: Detoured NtClose().\n");
+        printf("MSDetoursHideFile.dll: Detoured NtQueryDirectoryFile().\n");
     }
     else 
     {
-        char msgbuf[100];
-        sprintf_s(msgbuf, "MSDetoursHideFile.dll: Error detouring NtClose(): %ld\n", error);
-        OutputDebugStringA(msgbuf);
+        printf("MSDetoursHideFile.dll: Error detouring NtQueryDirectoryFile(): %ld\n", error);
     }
 }
 
@@ -119,9 +117,7 @@ void UnhookFunction()
     DetourDetach(&(PVOID&)TrueNtQueryDirectoryFile, HookNtQueryDirectoryFile);
     const LONG error = DetourTransactionCommit();
 
-    char msgbuf[100];
-    sprintf_s(msgbuf, "MSDetoursHideFile.dll: Removed NtClose() (result=%ld)\n", error);
-    OutputDebugStringA(msgbuf);
+    printf("MSDetoursHideFile.dll: Removed NtQueryDirectoryFile() (result=%ld)\n", error);
 
     fflush(stdout);
 }
