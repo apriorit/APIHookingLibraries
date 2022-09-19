@@ -1,11 +1,14 @@
 #include "pch.h"
 #include "Hooker.h"
 
-BOOL APIENTRY DllMain(DWORD ul_reason_for_call)
+BOOL APIENTRY DllMain(
+    HINSTANCE hinstDLL,
+    DWORD fdwReason,
+    LPVOID lpvReserved)
 {
     BOOL result = FALSE;
     
-    switch (ul_reason_for_call)
+    switch (fdwReason)
     {
     case DLL_PROCESS_ATTACH:
         result = HookFunction();

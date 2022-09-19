@@ -1,14 +1,17 @@
 #include "pch.h"
 #include "Hooker.h"
 
-BOOL APIENTRY DllMain(DWORD  ul_reason_for_call)
+BOOL APIENTRY DllMain(
+    HINSTANCE hinstDLL,
+    DWORD fdwReason,
+    LPVOID lpvReserved)
 {
     if (DetourIsHelperProcess())
     {
         return TRUE;
     }
     
-    switch (ul_reason_for_call)
+    switch (fdwReason)
     {
     case DLL_PROCESS_ATTACH:
         HookFunction();
